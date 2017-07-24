@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: httprouter
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 70000
+
+logging:
+  level:
+    ROOT: info
+
+
+######################################################################
+#是否使用注册中心
+ribbon:
+  ReadTimeout: 60000  #获取返回数据超时
+  ConnectTimeout: 60000  #ribbon请求连接的超时时间
+  MaxAutoRetries: 0 #重试次数
+  MaxAutoRetriesNextServer: 1 #下一个server的重试次数
+  eureka:
+    enabled: false
+#配置在配置文件中的路由信息
+zuul:
+  routes:
+    baidu:
+      url: https://www.baidu.com
+      path: /baidu/**
+      sensitive-headers:
+      custom-sensitive-headers: true
+    qq:
+      url: http://www.qq.com
+      path: /qq/**
+      sensitive-headers:
+      custom-sensitive-headers: true
+#  prefix: /iposcloudgate
+  host:
+    maxTotalConnections: 200
+    maxPerRouteConnections: 100
